@@ -22,6 +22,8 @@ pipeline{
           echo "${env.GIT_COMMIT}"
    
           sh 'git log --oneline -1 ${GIT_COMMIT}'
+          
+          sh 'git log --format="medium" -1 ${GIT_COMMIT}'
         }
 
         // Here the metadata is available as environment variable
