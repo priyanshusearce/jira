@@ -1,32 +1,12 @@
-pipeline{
-  
+pipeline {
   agent any
 
-  stages{
-    stage('Checkout code') {
-      steps {
-        script {
-          // Checkout the repository and save the resulting metadata
-          def scmVars = checkout([
-            $class: 'GitSCM',
-          ])
-
-          // Display the variable using scmVars
-          echo "scmVars.GIT_COMMIT"
-          echo "${scmVars.GIT_COMMIT}"
-
-          // Displaying the variables saving it as environment variable
-          env.GIT_COMMIT = scmVars.GIT_COMMIT
-          env.GIT_BRANCH = scmVars.GIT_BRANCH
-          echo "env.GIT_COMMIT"
-          echo "${env.GIT_COMMIT}"
-   
-          def issueKey = sh 'git log --oneline -1 ${GIT_COMMIT}'
-          
-          echo issueKey
+  stages {
+    stage('Checking code'){
+      steps{
+        script{
+          sh 'git log --format=format:%s -1'
         }
-
-        // Here the metadata is available as environment variable
       }
     }
   }
