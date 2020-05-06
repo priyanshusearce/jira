@@ -3,39 +3,39 @@ node {
     echo 'Pipeline has been triggered successfully'
   }
   
-  stage('JIRA - Get Transitions Issue'){
-    withEnv(['JIRA_SITE=JIRA-apigate']) {
-        def transitions = jiraGetIssueTransitions idOrKey: 'DEM-1'
-        echo transitions.data.toString()
-    }
+  // stage('JIRA - Get Transitions Issue'){
+  //   withEnv(['JIRA_SITE=JIRA-apigate']) {
+  //       def transitions = jiraGetIssueTransitions idOrKey: 'DEM-1'
+  //       echo transitions.data.toString()
+  //   }
+  // }
+
+  stage('Task Stage'){
+      echo 'Task has been started successfully.'
   }
 
-  // stage('Task Stage'){
-  //     echo 'Task has been started successfully.'
-  // }
-
-  // stage('JIRA - Change the Status') {
-  //   withEnv(['JIRA_SITE=JIRA-apigate']) {
-  //     echo 'Task has been started'
+  stage('JIRA - Change the Status') {
+    withEnv(['JIRA_SITE=JIRA-apigate']) {
+      echo 'Task has been started'
       
-  //     def transitionInput = [transition: [id: 31]]
-  //     jiraTransitionIssue idOrKey: 'DEM-1', input: transitionInput
+      def transitionInput = [transition: [id: 31]]
+      jiraTransitionIssue idOrKey: 'DEM-1', input: transitionInput
 
-  //   }
+    }
 
-  //   echo 'Task Status has been changed'
-  // }
+    echo 'Task Status has been changed'
+  }
 
-  // stage('JIRA - Add comment') {
-  //   withEnv(['JIRA_SITE=JIRA-apigate']) {
-  //     def comment = [ 
-  //       body: 'This is a temporary comment.' 
-  //     ]
-  //     jiraAddComment idOrKey: 'DEM-1', input: comment
-  //   }
+  stage('JIRA - Add comment') {
+    withEnv(['JIRA_SITE=JIRA-apigate']) {
+      def comment = [ 
+        body: 'This is a temporary comment.' 
+      ]
+      jiraAddComment idOrKey: 'DEM-1', input: comment
+    }
 
-  //   echo 'Comment has been added.'
-  // }
+    echo 'Comment has been added.'
+  }
 
   stage('Finish Stage'){
     echo 'Pipeline terminated successfully'
