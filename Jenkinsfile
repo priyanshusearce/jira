@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Checking code'){
       steps{
-        def issueKey = sh (
+        issueKey = sh (
           script: 'git log --format=format:%s -1', 
           returnStdout: true
         ).trim()
