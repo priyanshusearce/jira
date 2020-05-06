@@ -6,7 +6,6 @@ pipeline{
           // Checkout the repository and save the resulting metadata
           def scmVars = checkout([
             $class: 'GitSCM',
-            ...
           ])
 
           // Display the variable using scmVars
@@ -24,7 +23,6 @@ pipeline{
         }
 
         // Here the metadata is available as environment variable
-        ...
       }
     }
   }
