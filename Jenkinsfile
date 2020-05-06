@@ -4,7 +4,7 @@ node {
   }
   
   stage ('Testing') {
-    def issueKey = "env.BRANCH_NAME"
+    def issueKey = env.BRANCH_NAME
     echo issueKey
   }
 }
