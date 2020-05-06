@@ -21,9 +21,9 @@ pipeline{
           echo "env.GIT_COMMIT"
           echo "${env.GIT_COMMIT}"
    
-          sh 'git log --oneline -1 ${GIT_COMMIT}'
+          def issueKey = sh 'git log --oneline -1 ${GIT_COMMIT}'
           
-          sh 'git log -1 ${GIT_COMMIT}'
+          echo issueKey
         }
 
         // Here the metadata is available as environment variable
