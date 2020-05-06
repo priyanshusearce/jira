@@ -3,6 +3,11 @@ node {
     echo 'Pipeline has been triggered successfully'
   }
   
+  stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
   // stage('JIRA - Get Transitions Issue'){
   //   withEnv(['JIRA_SITE=JIRA-apigate']) {
   //       def transitions = jiraGetIssueTransitions idOrKey: 'DEM-1'
