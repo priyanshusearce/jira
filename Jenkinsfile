@@ -10,6 +10,14 @@ node {
   //   }
   // }
 
+  
+  stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+  
+  
   stage('Task Stage'){
       echo 'Task has been started successfully.'
   }
