@@ -20,9 +20,8 @@ pipeline{
           env.GIT_BRANCH = scmVars.GIT_BRANCH
           echo "env.GIT_COMMIT"
           echo "${env.GIT_COMMIT}"
-          
-          echo "env.GIT_BRANCH"
-          echo "${env.GIT_BRANCH}"
+   
+          sh 'git log --oneline -1 ${GIT_COMMIT}'
         }
 
         // Here the metadata is available as environment variable
