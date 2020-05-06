@@ -4,7 +4,7 @@ node {
   }
   
   stage ('Testing') {
-    def issueKey = env.BRANCH_NAME
-    echo issueKey
+    sh 'git rev-parse HEAD > commit'
+    def commit = readFile('commit').trim()
   }
 }
