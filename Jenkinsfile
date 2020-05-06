@@ -3,13 +3,10 @@ pipeline {
 
   stages {
     stage('JIRA - Add comment') {
-      withEnv(['JIRA_SITE=JIRA-apigate']) {
-        def comment = [ 
-          body: 'This is a temporary comment.' 
-        ]
-        jiraAddComment idOrKey: 'DEM-1', input: comment
+      script {
+        def comment = [ body: 'test comment' ]
+        jiraAddComment site: 'JIRA-apigate', idOrKey: sh 'git log --format=format:%s -1', input: comment
       }
-
       echo 'Comment has been added.'
     }
   }
