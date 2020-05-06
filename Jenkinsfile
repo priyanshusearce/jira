@@ -1,7 +1,7 @@
 pipeline{
   agent any
 
-  stage('Testing'){
+  stages('Testing'){
     steps{
       withEnv(['JIRA_SITE=JIRA-apigate']) {
         def comment = [ 
