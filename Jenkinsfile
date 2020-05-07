@@ -1,4 +1,5 @@
 node {
+  //Checkout
   stage('checkout'){
     checkout scm
   }
