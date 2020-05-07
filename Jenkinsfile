@@ -12,8 +12,8 @@ node {
     ).trim() 
   }
 
-  stage('Getting Values'){
-    echo "${issueKey}"
-    echo jiraSite
+  stage('Add comment to the JIRA issue'){
+    def comment = [ body: 'Dynamically added the issue key.' ]
+    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: comment
   }
 }
