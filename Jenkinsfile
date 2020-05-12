@@ -15,7 +15,9 @@ node('jenkins-slave') {
     issueKey = sh (
       script: 'git log --format=format:%s -1',
       returnStdout: true,
-    ).trim() 
+    ).trim()
+
+    echo "${issueKey}" 
   }
 
   stage('Task Stage'){
