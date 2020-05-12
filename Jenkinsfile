@@ -1,4 +1,4 @@
-node('terraform') {
+node('terraform-label') {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
