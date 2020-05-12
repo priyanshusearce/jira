@@ -8,7 +8,7 @@ node {
   }
   
   stage('Stage-1'){
-    echo 'Pipeline has been triggered successfully'
+    echo 'Pipeline has been triggered successfully..'
   }
   
   stage('Checking Code'){
