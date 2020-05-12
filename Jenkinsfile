@@ -1,4 +1,4 @@
-node('terraform-slave') {
+node('jenkins-slave') {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
