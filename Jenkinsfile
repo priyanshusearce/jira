@@ -1,7 +1,11 @@
-node('jenkins-slave') {
+node() {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
+  
+  environment {
+    SVC_ACCOUNT_KEY = credentials('terraform-auth')
+  }
 
   stage('Checkout SCM') {
     checkout scm
@@ -9,6 +13,10 @@ node('jenkins-slave') {
   
   stage('Stage-1'){
     echo 'Pipeline has been triggered successfully..'
+
+    container('terraform'){
+      sh 'terraform init'
+    }
   }
   
   stage('Checking Code'){
