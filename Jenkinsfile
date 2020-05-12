@@ -7,11 +7,6 @@ node('jenkins-slave') {
     checkout scm
   }
   
-  stage('Stage-1'){
-    echo 'Pipeline has been triggered successfully..'
-    sh 'terraform init'
-  }
-  
   stage('Checking Code'){
     issueKey = sh (
       script: 'git log --format=format:%s -1',
@@ -21,8 +16,16 @@ node('jenkins-slave') {
     echo "${issueKey}" 
   }
 
-  stage('Task Stage'){
-    echo 'Task has been started successfully.'
+  stage('Stage 1: Init'){
+    sh 'terraform init'
+  }
+  
+  stage('Stage 2: Plan'){
+    sh 'terraform plan'
+  }
+
+  stage('Stage 3: Apply'){
+    sh 'terraform apply -auto-approve'
   }
 
   stage('JIRA - Change the Status') {
