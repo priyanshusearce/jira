@@ -2,10 +2,6 @@ node('terraform') {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
-  
-  environment {
-    SVC_ACCOUNT_KEY = credentials('terraform-auth')
-  }
 
   stage('Checkout SCM') {
     checkout scm
