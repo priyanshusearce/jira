@@ -1,4 +1,4 @@
-node() {
+node('terraform') {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
@@ -13,10 +13,7 @@ node() {
   
   stage('Stage-1'){
     echo 'Pipeline has been triggered successfully..'
-
-    container('terraform'){
-      sh 'terraform init'
-    }
+    sh 'terraform init'
   }
   
   stage('Checking Code'){
