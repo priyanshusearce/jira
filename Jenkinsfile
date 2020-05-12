@@ -3,6 +3,10 @@ node {
   def issueKey
   def jiraSite = 'JIRA-apigate'
   
+  agent {
+    label 'jenkins-slave'
+  }
+
   stage('Checkout SCM') {
     checkout scm
   }
