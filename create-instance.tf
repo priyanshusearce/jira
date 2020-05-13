@@ -1,4 +1,4 @@
-resource "google_compute_instance" "gcp_vm" {
+resource "google_compute_instance" "default" {
   name         = "vm-terraform-priyanshu"
   machine_type = "f1-micro"
   zone         = "asia-south1-c"
