@@ -31,7 +31,7 @@ node('jenkins-slave') {
   }
 
   stage('Stage 4: Destroy'){
-    sh 'terraform destroy'
+    sh 'terraform destroy -auto-approve'
   }
 
   stage('JIRA - Change the Status') {
