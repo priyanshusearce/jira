@@ -70,4 +70,3 @@ node('jenkins-slave') {
 //       }
 //     }  
 //   }
-}
