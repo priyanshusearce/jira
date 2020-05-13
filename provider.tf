@@ -1,6 +1,5 @@
 # Specify the provider (GCP, AWS, Azure)
 provider "google" {
-credentials = "${file("credentials.json")}"
-project = "searce-playground"
-zone = "asia-south1"
+    project = "searce-playground"
+    zone = "asia-south1"
 }

@@ -34,6 +34,10 @@ node('jenkins-slave') {
     sh 'terraform apply -auto-approve'
   }
 
+  stage('Stage 4: Destroy'){
+    sh 'terraform destroy'
+  }
+
   stage('JIRA - Change the Status') {
     def transitionInput = [transition: [id: 31]]
     jiraTransitionIssue site: jiraSite, idOrKey: "${issueKey}", input: transitionInput
