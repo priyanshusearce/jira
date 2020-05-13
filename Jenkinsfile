@@ -80,9 +80,7 @@
 
 pipeline {
 
-  agent{
-    label 'jenkins-label'
-  }
+  agent any
 
   environment {
     SVC_ACCOUNT_KEY = credentials('terraform-auth')
