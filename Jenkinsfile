@@ -3,12 +3,13 @@ node('jenkins-slave') {
   def issueKey
   def jiraSite = 'JIRA-apigate'
   
-  stage('Checkout SCM') {
-    checkout scm
-    
-    def SVC_ACCOUNT_KEY = credentials('terraform-auth')
+  withCredentials([string(credentialsId: 'terraform-auth', variable: 'SVC_ACCOUNT_KEY')]){
     sh 'mkdir -p creds' 
     sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/credentials.json'
+  }
+  
+  stage('Checkout SCM') {
+    checkout scm
   }
   
   stage('Checking Code'){
@@ -70,4 +71,3 @@ node('jenkins-slave') {
 //       }
 //     }  
 //   }
-}
