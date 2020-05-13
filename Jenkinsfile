@@ -27,11 +27,11 @@ node('jenkins-slave') {
   }
   
   stage('Stage 2: Plan'){
-    sh 'terraform plan'
+    sh 'terraform plan -out myplan'
   }
 
   stage('Stage 3: Apply'){
-    sh 'terraform apply -auto-approve'
+    sh 'terraform apply -input=false myplan'
   }
 
   stage('Stage 4: Destroy'){
