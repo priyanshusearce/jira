@@ -2,13 +2,16 @@ node('jenkins-slave') {
 
   def issueKey
   def jiraSite = 'JIRA-apigate'
+  def SVC_ACCOUNT_KEY
 
-  environment {
-    SVC_ACCOUNT_KEY = credentials('terraform-auth')
-  }
+  // environment {
+  //   SVC_ACCOUNT_KEY = credentials('terraform-auth')
+  // }
+  // withEnv(['JIRA_SITE=LOCAL'])
 
   stage('Checkout SCM') {
     checkout scm
+    SVC_ACCOUNT_KEY = credentials('terraform-auth')
     sh 'mkdir -p creds' 
     sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/credentials.json'
   }
