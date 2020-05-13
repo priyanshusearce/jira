@@ -10,7 +10,8 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    network = "default"
+    network = "demo-vpc-priyanshu"
+    subnetwork = "demo-vpc-priyanshu-public"
 
     access_config {
       // Include this section to give the VM an external ip address
@@ -25,7 +26,7 @@ resource "google_compute_instance" "default" {
 
 resource "google_compute_firewall" "http-server" {
   name    = "default-allow-http-terraform"
-  network = "default"
+  network = "demo-vpc-priyanshu"
 
   allow {
     protocol = "tcp"
