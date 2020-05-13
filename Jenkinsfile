@@ -77,7 +77,7 @@
 //   }
 // }
 
-node('jenkins-label'){
+node('jenkins-slave'){
   def issueKey
   def jiraSite = 'JIRA-apigate'
 
