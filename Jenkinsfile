@@ -16,41 +16,28 @@ node('jenkins-slave') {
     issueKey = sh (
       script: 'git log --format=format:%s -1',
       returnStdout: true,
-    ).trim()
-
-    echo "${issueKey}" 
+    ).trim() 
   }
 
   stage('Stage 1: Init & Plan'){
+    // Terraform Initialization
     sh 'terraform init'
-    sh 'terraform plan -out myplan'
-    // try{
-    //   sh 'terraform init'
-    //   sh 'terraform plan -out myplan'
-    // } catch(error) {
-    //   jiraAddComment idOrKey: "${issueKey}", comment: "${BUILD_URL} ERROR WHILE RELEASING ${error}"
-    //   currentBuild.result = 'FAILURE'
-    // }
+
+    // Applying terraform plan and storing it in a variable for comment
+    terraform_plan = sh script: 'terraform plan -out myplan', returnStdout: true
+    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_plan
+    
   }
 
   stage('Stage 2: Apply'){
-    sh 'terraform apply -input=false myplan'
-    // try{
-    //   sh 'terraform apply -input=false myplan'
-    // } catch(error) {
-    //   jiraAddComment idOrKey: "${issueKey}", comment: "${BUILD_URL} ERROR WHILE RELEASING ${error}"
-    //   currentBuild.result = 'FAILURE'
-    // }
+    
+    // Applying terraform apply and storing it in a variable for comment
+    terraform_apply = sh script: 'terraform apply -input=false myplan', returnStdout: true 
+    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_plan
   }
 
   stage('Stage 4: Destroy'){
     sh 'terraform destroy -auto-approve'
-    // try{
-    //   sh 'terraform destroy -auto-approve'
-    // } catch(error) {
-    //   jiraAddComment idOrKey: "${issueKey}", comment: "${BUILD_URL} ERROR WHILE RELEASING ${error}"
-    //   currentBuild.result = 'FAILURE'
-    // }
   }
 
   stage('JIRA - Change the Status') {
@@ -62,28 +49,10 @@ node('jenkins-slave') {
       jiraTransitionIssue site: jiraSite, idOrKey: "${issueKey}", input: transitionInput
 
       echo 'Task Status has been changed'
-    // try{
-    //   def transitionInput = [
-    //     transition: [
-    //       id: 31
-    //     ]
-    //   ]
-    //   jiraTransitionIssue site: jiraSite, idOrKey: "${issueKey}", input: transitionInput
-
-    //   echo 'Task Status has been changed'
-    // } catch(error) {
-    //   jiraAddComment idOrKey: "${issueKey}", comment: "${BUILD_URL} ERROR WHILE RELEASING ${error}"
-    //   currentBuild.result = 'FAILURE'
-    // }
-    
   }
 
   stage('Add comment to the JIRA issue'){
-    def comment = [ body: 'Dynamically added the issue key.' ]
+    def comment = [ body: 'Completed !!!' ]
     jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: comment
-  }
-
-  stage('Finish Stage'){
-    echo 'Pipeline terminated successfully'
   }
 }
