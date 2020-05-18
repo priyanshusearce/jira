@@ -36,7 +36,11 @@ node('jenkins-slave') {
     
     // Applying terraform apply and storing it in a variable for comment
     terraform_apply = sh script: 'terraform apply -input=false myplan', returnStdout: true 
-    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_plan
+    
+    def terraform_apply_output = [
+      body: terraform_apply
+    ]
+    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_apply_output
   }
 
   stage('Stage 4: Destroy'){
