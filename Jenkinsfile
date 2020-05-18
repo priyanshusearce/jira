@@ -25,7 +25,10 @@ node('jenkins-slave') {
 
     // Applying terraform plan and storing it in a variable for comment
     terraform_plan = sh script: 'terraform plan -out myplan', returnStdout: true
-    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_plan
+    def terraform_plan_output = [
+      body: terraform_plan
+    ]
+    jiraAddComment site: jiraSite, idOrKey: "${issueKey}", input: terraform_plan_output
     
   }
 
