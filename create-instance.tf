@@ -1,5 +1,5 @@
 resource "google_compute_instance" "default" {
-  name         = "vm-terraform-priyanshu"
+  name         = "vm-terraform-searce"
   machine_type = "f1-micro"
   zone         = "asia-south1-c"
 
