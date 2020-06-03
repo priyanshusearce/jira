@@ -1,5 +1,19 @@
-node('terraform-slave'){
-    ansiColor('xterm') {
-        echo 'Hello World !!'
+pipeline {
+  agent {
+      label 'terraform-slave'
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
     }
+    stage('init') {
+      steps {
+          ansiColor('xterm') {
+            sh 'terraform init'
+          }
+        }
+    }
+  }
 }
