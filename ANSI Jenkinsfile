@@ -1,0 +1,7 @@
+node('terraform-slave'){
+    stage('Test'){
+        ansiColor('xterm') {
+            sh 'terraform init'
+        }
+    }
+}
