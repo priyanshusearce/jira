@@ -5,7 +5,7 @@ region  = "asia-south1"
 }
 
 # Create a GCS Bucket
-resource "google_storage_bucket" "my_bucket" {
+resource "google_storage_bucket" "default" {
 name     = "testing-bucket"
 location = "asia-south1"
 }
