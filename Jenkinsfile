@@ -10,30 +10,22 @@ pipeline {
     }
     stage('init') {
       steps {
-          ansiColor('xterm') {
-            sh 'terraform init'
-          }
-        }
+        sh 'terraform init'  
+      }
     }
     stage('plan') {
       steps {
-        ansiColor('xterm') {
-          sh 'terraform plan'
-        }
+        sh 'terraform plan -out myplan'
       }
     }
     stage('TF Apply') {
       steps {
-        ansiColor('xterm') {
-          sh 'terraform apply -auto-approve'
-        }
+        sh 'terraform apply -input=false myplan'
       }
     }
     stage('TF Destroy') {
       steps {
-        ansiColor('xterm') {
-          sh 'terraform destroy -auto-approve'
-        }
+        sh 'terraform destroy -auto-approve'
       }
     }
   }
