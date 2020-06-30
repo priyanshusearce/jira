@@ -1,4 +1,4 @@
-// file: backend.tf
+# file: backend.tf
 terraform {
   backend "gcs" {
     bucket = "apigate-searce-tf-bucket"
