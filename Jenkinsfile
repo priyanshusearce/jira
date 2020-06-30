@@ -11,7 +11,7 @@ pipeline {
     stage('init') {
       steps {
         ansiColor('xterm') {
-          sh 'terraform init'
+          sh 'terraform init -reconfigure'
         }  
       }
     }
