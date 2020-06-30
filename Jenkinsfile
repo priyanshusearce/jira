@@ -29,12 +29,5 @@ pipeline {
         }
       }
     }
-    stage('TF Destroy') {
-      steps {
-        ansiColor('xterm'){
-          sh 'terraform destroy -auto-approve'  
-        }
-      }
-    }
   }
 }
