@@ -20,14 +20,14 @@ pipeline {
     stage('plan') {
       steps {
         ansiColor('xterm'){
-          sh 'terraform plan -out myplan'  
+          sh 'terraform plan -out tfplan'  
         }
       }
     }
     stage('TF Apply') {
       steps {
         ansiColor('xterm'){
-          sh 'terraform apply -input=false myplan'
+          sh 'terraform apply -input=false tfplan'
         }
       }
     }
