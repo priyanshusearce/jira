@@ -18,14 +18,21 @@ pipeline {
     stage('plan') {
       steps {
         ansiColor('xterm'){
-          sh 'terraform plan -out tfplan'  
+          sh 'terraform plan -out myplan'  
         }
       }
     }
     stage('TF Apply') {
       steps {
         ansiColor('xterm'){
-          sh 'terraform apply -input=false tfplan'
+          sh 'terraform apply -input=false myplan'
+        }
+      }
+    }
+    stage('TF Destroy') {
+      steps {
+        ansiColor('xterm'){
+          sh 'terraform destroy'
         }
       }
     }
