@@ -12,7 +12,7 @@
 
 # Specify the GCP Provider
 provider "google" {
-    project = "searce-playground"
+    project = "project-apigate-stg-hub"
     region  = "asia-south1"
 }
 
