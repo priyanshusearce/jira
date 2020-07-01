@@ -6,6 +6,11 @@ pipeline {
     stage('Checkout') {
       steps {
         checkout scm
+
+        withCredentials([string(credentialsId: 'terraform-auth', variable: 'SVC_ACCOUNT_KEY')]){
+          sh 'mkdir -p creds' 
+          sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/credentials.json'
+        }
       }
     }
     stage('init') {
