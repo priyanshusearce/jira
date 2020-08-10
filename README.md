@@ -23,7 +23,7 @@ $ docker container run --name=web -p 5000:80 alpine:3.9
 ```
 
 
-## Pushing Images to Google Container Registry (GCR)
+## Pushing Docker Images to Google Container Registry (GCR)
 Steps to push the image to GCR.</br>
 **Step 1: Tag the image with the container registry location.**
 ```
