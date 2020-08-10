@@ -24,7 +24,7 @@ $ docker container run --name=web -p 5000:80 alpine:3.9
 
 
 ## Pushing Docker Images to Google Container Registry (GCR)
-Steps to push the image to GCR.</br>
+Steps to push the image to GCR.</br></br>
 **Step 1: Tag the image with the container registry location.**
 ```
 $ docker tag <IMAGE_ID> us.gcr.io/searchpoc-284614/<IMAGE_NAME>:<TAG>
@@ -38,10 +38,10 @@ $ gcloud docker -- push us.gcr.io/searchpoc-284614/<IMAGE_NAME>:<TAG>
 ## Deploying application on Google Kubernetes Enginer (GKE)
 ### Deploying RabbitMQ and Datadog services on GKE.
 
-**Deploying RabbitMQ on GKE**
+**Deploying RabbitMQ on GKE**</br>
 RabbitMQ is the most widely deployed open source message broker.RabbitMQ is lightweight and easy to deploy on premises and in the cloud. It supports multiple messaging protocols. RabbitMQ can be deployed in distributed and federated configurations to meet high-scale, high-availability requirements.</br></br>
 
-**Steps**
+**Steps**</br>
 Step 1: Go to the folder **/RabbitMQ**.
 
 Step 2: You'll find the *rabbitmq.yaml* and *rabbitmq-rbac.yaml* files. *rabbitmq.yaml* is used to deploy the **StatefulSet**, **Service** and **PersistentVolumeClain** where *rabbitmq-rbac* is used to deploy the **ServiceAccount**, **Roles** and **RoleBinding**.
@@ -52,10 +52,10 @@ $ kubectl apply -f rabbitmq.yaml
 $ kubectl apply -f rabbiit-rbac.yaml
 ```
 
-**Deploying Datadog service on GKE**
+**Deploying Datadog service on GKE**</br>
 Datadog is a monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through a SaaS-based data analytics platform.
 
-**Steps**
+**Steps**</br>
 Step 1: Go to the folder **/Datadog**.
 
 Step 2: You'll find the *dd-agent.yaml*, *dd-rbac.yaml* and *dd-secret.yaml* files. *dd-agent.yaml* is used to deploy **Deployment** for Datadog Cluster Agent and **Daemonset** for Datadog Node Agent along with their **Services**.
@@ -84,7 +84,7 @@ This will deploy the **Secret** in which we can store the confidential informati
 
 The **odc-search** and **odc-worker** application use env variables and some API keys for their configuration. To store the env variables and API keys, we use **ConfigMap** and **Secrets**. **Ingress** is also used to manage the external access to the services.</br>
 
-Kubernetes ConfigMap is used to store non-confidential data in key-value pairs and Kubernetes Secrets let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys in a safer and more flexible way.</br>
+**Kubernetes ConfigMap** is used to store non-confidential data in key-value pairs and **Kubernetes Secrets** let you store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys in a safer and more flexible way.</br>
 
 To deploy the **ConfigMap** and **Secret** in GKE,</br> 
 Step 1: Get into the folder named **/Apps**.
@@ -98,14 +98,14 @@ $ kubectl apply -f configmap.yaml
 $ kubectl apply -f secret.yaml
 ```
 
-Kubernetes Ingress is an API object that manages external access to the services in a cluster, typically HTTP. Ingress may provide load balancing, SSL termination and name-based virtual hosting.We have used Google Managed SSL certificates</br>
+**Kubernetes Ingress** is an API object that manages external access to the services in a cluster, typically HTTP. Ingress may provide load balancing, SSL termination and name-based virtual hosting.We have used Google Managed SSL certificates</br>
 
 Step 4: To deploy ingress, get the mainfest file named *ingress.yaml* and run the following command. This will deploy the **Ingress** and **ManagedCertificate**.
 ```
 $ kubectl apply -f ingress.yaml
 ```
 ## odc-search
-**Steps**
+**Steps**</br>
 For **odc-search**, there is a manifest file named *odc-search-deployment.yaml*. This file will deploy the *odc-search* app on GKE.
 
 Step 1: Get the file *odc-search-deployment.yaml*.
@@ -117,7 +117,7 @@ $ kubectl apply -f odc-search-deployment.yaml
 ```
 
 ## odc-worker
-**Steps**
+**Steps**</br>
 For **odc-worker**, there is a manifest file named *odc-worker-deployment.yaml*. This file will deploy the *odc-worker* app on GKE.
 
 Step 1: Get the file *odc-worker-deployment.yaml*.
